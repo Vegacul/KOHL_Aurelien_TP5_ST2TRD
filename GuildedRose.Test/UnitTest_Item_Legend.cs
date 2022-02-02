@@ -12,30 +12,30 @@ namespace GuildedRose.Test
         public void SulfurasShouldNotChangeInQuality()
         {
             // Arrange
-            var classicItem = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 25, Quality = 80 };
-            IList<Item> Items = new List<Item> { classicItem };
+            var LegendItem = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 25, Quality = 80 };
+            IList<Item> Items = new List<Item> { LegendItem };
             GildedRose app = new GildedRose(Items);
 
             // Act
             app.UpdateQuality();
 
             // Assert
-            Assert.AreEqual(classicItem.Quality, 80);
+            Assert.AreEqual(LegendItem.Quality, 80);
         }
 
         [Test]
         public void SulfurasShouldNotChangeInDate()
         {
             // Arrange
-            var classicItem = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 25, Quality = 80 };
-            IList<Item> Items = new List<Item> { classicItem };
+            var LegendItem = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 25, Quality = 80 };
+            IList<Item> Items = new List<Item> { LegendItem };
             GildedRose app = new GildedRose(Items);
 
             // Act
             app.UpdateQuality();
 
             // Assert
-            Assert.AreEqual(classicItem.SellIn, 25);
+            Assert.AreEqual(LegendItem.SellIn, 25);
         }
     }
 }

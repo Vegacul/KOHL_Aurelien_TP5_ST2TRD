@@ -14,30 +14,30 @@ namespace GuildedRose.Test
         public void ConjuredItemShouldQualityDecreaseBy2BeforeTheDate()
         {
             // Arrange
-            var classicItem = new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 15 };
-            IList<Item> Items = new List<Item> { classicItem };
+            var ConjuredItem = new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 15 };
+            IList<Item> Items = new List<Item> { ConjuredItem };
             GildedRose app = new GildedRose(Items);
 
             // Act
             app.UpdateQuality();
 
             // Assert
-            Assert.AreEqual(classicItem.Quality, 13);
+            Assert.AreEqual(ConjuredItem.Quality, 13);
         }
 
         [Test]
         public void ConjuredItemShouldQualityDecreaseBy4AfterTheDate()
         {
             // Arrange
-            var classicItem = new Item { Name = "Conjured Mana Cake", SellIn = -3, Quality = 10 };
-            IList<Item> Items = new List<Item> { classicItem };
+            var ConjuredItem = new Item { Name = "Conjured Mana Cake", SellIn = -3, Quality = 10 };
+            IList<Item> Items = new List<Item> { ConjuredItem };
             GildedRose app = new GildedRose(Items);
 
             // Act
             app.UpdateQuality();
 
             // Assert
-            Assert.AreEqual(classicItem.Quality, 6);
+            Assert.AreEqual(ConjuredItem.Quality, 6);
         }
     }
 }

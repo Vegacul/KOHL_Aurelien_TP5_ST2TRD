@@ -10,45 +10,45 @@ namespace GuildedRose.Test
         public void ConcertItemQualityShouldIncreaseByOneWithTime()
         {
             // Arrange
-            var classicItem = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 20, Quality = 18 };
-            IList<Item> Items = new List<Item> { classicItem };
+            var concertItem = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 20, Quality = 18 };
+            IList<Item> Items = new List<Item> { concertItem };
             GildedRose app = new GildedRose(Items);
 
             // Act
             app.UpdateQuality();
 
             // Assert
-            Assert.AreEqual(classicItem.Quality, 19);
+            Assert.AreEqual(concertItem.Quality, 19);
         }
 
         [Test]
         public void ConcertItemQualityShouldIncreaseByTwoIfDateInfTo10()
         {
             // Arrange
-            var classicItem = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 18 };
-            IList<Item> Items = new List<Item> { classicItem };
+            var concertItem = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 18 };
+            IList<Item> Items = new List<Item> { concertItem };
             GildedRose app = new GildedRose(Items);
 
             // Act
             app.UpdateQuality();
 
             // Assert
-            Assert.AreEqual(classicItem.Quality, 20);
+            Assert.AreEqual(concertItem.Quality, 20);
         }
 
         [Test]
         public void ConcertItemQualityShouldIncreaseByTreeIfDateInfTo5()
         {
             // Arrange
-            var classicItem = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 17 };
-            IList<Item> Items = new List<Item> { classicItem };
+            var concertItem = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 17 };
+            IList<Item> Items = new List<Item> { concertItem };
             GildedRose app = new GildedRose(Items);
 
             // Act
             app.UpdateQuality();
 
             // Assert
-            Assert.AreEqual(classicItem.Quality, 20);
+            Assert.AreEqual(concertItem.Quality, 20);
         }
     }
 }
