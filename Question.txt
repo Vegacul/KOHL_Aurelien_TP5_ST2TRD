@@ -1,0 +1,22 @@
+
+1. What is this code about?
+
+
+3. Can you clearly identify the name of all the goods stored in the Guilded Rose?
+
+
+5. What happens when the day is over?
+
+
+7. What happens to cheese when the day is over?
+
+
+9. What happens when a concert ticket goes over its expiration day?
+
+
+11. What makes this code hard to read?
+
+
+13. Do you think the rules are clear enough so that you could rework the entire solution from scratch?
+
+
