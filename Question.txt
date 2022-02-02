@@ -1,0 +1,41 @@
+
+1. What is this code about?
+
+  this code allows you to manage an inventory of a Tavern, each product has an expiry date and a quality, depending on the type of product, their evolution over the days is not the same.
+
+3. Can you clearly identify the name of all the goods stored in the Guilded Rose?
+  
+  we can see ine the main programm the list of the item declared at the creation of the Guilded rose tarvern 
+    +5 Dexterity Vest
+    Aged Brie
+    Elixir of the Mongoose
+    Sulfuras, Hand of Ragnaros
+    Sulfuras, Hand of Ragnaros
+    Backstage passes to a TAFKAL80ETC concert
+    Backstage passes to a TAFKAL80ETC concert
+    Backstage passes to a TAFKAL80ETC concert
+    Conjured Mana Cake
+
+5. What happens when the day is over?
+
+  When th day is over, the programm use .UpdateQuality() the updata the quaity of each item
+  This metod check the name of the item , the actual days to update de quality properly 
+
+7. What happens to cheese when the day is over?
+
+  When the cheese is outdated, his quality grow tow time faster so the cheese gain +2 of quality each new days, until the 26th day , on the 26th day the quality is 50 and this is the max possible
+
+9. What happens when a concert ticket goes over its expiration day?
+
+  When a concert tiket go over the expiration date, the quality of the ticket go to 0
+
+11. What makes this code hard to read?
+
+  the .UpdateQuality() is not easy to read and to understand without the readme file
+
+13. Do you think the rules are clear enough so that you could rework the entire solution from scratch?
+
+  There is some error in the rules like in the cheese quality increase by 2 after the date and note by 1 
+  The quality of a product is never more than 50 but the Sulfuras, Hand of Ragnaros had a quality of 80
+
+
