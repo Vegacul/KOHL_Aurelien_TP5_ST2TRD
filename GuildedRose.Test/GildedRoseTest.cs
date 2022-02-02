@@ -1,7 +1,11 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using csharp;
 
-namespace csharp
+
+
+
+namespace GuildedRose.Test
 {
     [TestFixture]
     public class GildedRoseTest

@@ -4,8 +4,10 @@ using System.Text;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using NUnit.Framework;
+using csharp;
 
-namespace csharp
+
+namespace GuildedRose.Test
 {
     [UseReporter(typeof(DiffReporter))]
     [TestFixture]
