@@ -13,18 +13,25 @@ namespace GuildedRose.Test
     [TestFixture]
     public class ApprovalTest
     {
+
         [Test]
         public void ThirtyDays()
         {
-            
+
             StringBuilder fakeoutput = new StringBuilder();
+
+            // Redirect standard output from the console to the stringwritter qui ecrit dans fakeoutput 
             Console.SetOut(new StringWriter(fakeoutput));
+            // Redirect  input to the console
             Console.SetIn(new StringReader("a\n"));
+
 
             Program.Main(new string[] { });
             var output = fakeoutput.ToString();
 
             Approvals.Verify(output);
         }
+
+
     }
 }
