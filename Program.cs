@@ -49,6 +49,7 @@ namespace csharp
                 }
                 Console.WriteLine("");
                 app.UpdateQuality();
+                //Console.WriteLine("blup");
             }
 
 

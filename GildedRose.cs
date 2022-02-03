@@ -11,140 +11,128 @@ namespace csharp
             this.Items = Items;
         }
 
-        public void DecreaseQuality(int i, int x)
+        private bool RespectMINQuality(Item item)
         {
-            if (((Items[i].Quality - x) >= 0) && ((Items[i].Quality - x) <= 50))
-            {
-                Items[i].Quality = Items[i].Quality - x;
-            }
-            else if (((Items[i].Quality) > 50))
-            {
-                Items[i].Quality = 50;
-                Items[i].Quality = Items[i].Quality - x;
-            }
-            else
-            {
-                Items[i].Quality = 0;
-            }
-
+            return item.Quality > 0;
         }
 
-        public void IncreaseQuality(int i, int x)
+        private bool RespectMAXQuality(Item item)
         {
-            if (((Items[i].Quality + x) <= 50)&& ((Items[i].Quality + x) > 0))
-            {
-                Items[i].Quality = Items[i].Quality + x;
-            }
-            else if ((Items[i].Quality + x) <= 0)
-            {
-                Items[i].Quality = 0;
-                Items[i].Quality = Items[i].Quality + x;
-            }
-            else
-            {
-                Items[i].Quality = 50;
-            }
+            return item.Quality < 50;
         }
 
-        public void UpdateQualityCommonItem(int i)
+        private void DecreaseSellIn(Item item)
         {
-            if (Items[i].SellIn >= 0)
-            {
-                DecreaseQuality(i, 1);
-
-            }
-            else
-            {
-                DecreaseQuality(i, 2);
-            }
-        }
-        public void UpdateQualityFromageItem(int i)
-        {
-            if (Items[i].SellIn >= 0)
-            {
-                IncreaseQuality(i, 1);
-
-            }
-            else
-            {
-                IncreaseQuality(i, 2);
-            }
-        }
-        public void UpdateQualityLegendItem(int i)
-        {
-            if (Items[i].Quality != 80)
-            {
-                Items[i].Quality = 80;
-
-            }
-        }
-        public void UpdateQualityConcertItem(int i)
-        {
-            if (Items[i].SellIn < 0)
-            {
-                Items[i].Quality = 0;
-
-            }
-            else if (Items[i].SellIn < 5)
-            {
-                IncreaseQuality(i, 3);
-            }
-            else if (Items[i].SellIn < 10)
-            {
-                IncreaseQuality(i, 2);
-            }
-            else if (Items[i].SellIn >= 10)
-            {
-                IncreaseQuality(i, 1);
-            }
+            item.SellIn = item.SellIn - 1;
         }
 
-        public void UpdateQualityConjuredItem(int i)
+        private void DecreaseQuality(Item item)
         {
-            if (Items[i].SellIn >= 0)
-            {
-                DecreaseQuality(i, 1);
+            item.Quality = item.Quality - 1;
+        }
+        private void IncreaseQuality(Item item)
+        {
+            item.Quality = item.Quality + 1;
+        }
 
-            }
-            else
+        private void UpdateSellIn(Item item)
+        {
+            /// ON PASSE LA DATE SI PAS LEGEND
+            if (item.Name != "Sulfuras, Hand of Ragnaros")
             {
-                DecreaseQuality(i, 2);
+                DecreaseSellIn(item);
             }
         }
 
         public void UpdateQuality()
         {
-
-            for (var i = 0; i < Items.Count; i++)
+            foreach (Item item in Items)
             {
 
-                if (Items[i].Name.Contains("Sulfuras, Hand of Ragnaros"))
+                
+
+                /// POUR LES OBJET QUI BAISSE EN VALEUR
+
+                if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    //Console.WriteLine("detection legend");
-                    UpdateQualityLegendItem(i);
+                    if (RespectMINQuality(item))
+                    {
+                        /// POUR LES OBJET QUI BAISSE EN VALEUR
+                        if (item.Name != "Sulfuras, Hand of Ragnaros")
+                        {
+                            DecreaseQuality(item);
+                        }
+                    }
                 }
+                /// POUR LES OBJET QUI monte EN VALEUR
                 else
                 {
-                    Items[i].SellIn = Items[i].SellIn - 1;
+                    /// LA QUALITE MONTE DE UN POUR TOUS 
+                    if (RespectMAXQuality(item))
+                    {
+                        IncreaseQuality(item);
 
-                    if (Items[i].Name.Contains("Backstage passes"))
-                    {
-                        UpdateQualityConcertItem(i);
-                    }
-                    else if (Items[i].Name == "Aged Brie")
-                    {
-                        UpdateQualityFromageItem(i);
-                    }
-                    else if (Items[i].Name.Contains("Conjured"))
-                    {
-                        UpdateQualityConjuredItem(i);
-                    }
-                    else
-                    {
-                        UpdateQualityCommonItem(i);
+                        /// SI CONCERT ALORS 
+                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                        {
+                            /// SI RESTE 10 JOUR ON AJOUTE UN DONC TOTAL PLUS 2
+                            if (item.SellIn < 11)
+                            {
+                                if (RespectMAXQuality(item))
+                                {
+                                    IncreaseQuality(item);
+                                }
+                            }
+                            /// SI RESTE 5 JOUR ON AJOUTE UN DONC TOTAL PLUS 3
+                            if (item.SellIn < 6)
+                            {
+                                if (RespectMAXQuality(item))
+                                {
+                                    IncreaseQuality(item);
+                                }
+                            }
+                        }
                     }
                 }
-                
+
+                UpdateSellIn(item);
+
+
+                /// QUAND LA DATE EST PASSE
+                if (item.SellIn < 0)
+                {
+                    /// SI C4EST PAS DU FROMAGE LA QUALITE VA BAISSER
+                    if (item.Name != "Aged Brie")
+                    {
+                        /// POUR TOUT LES OBJET SAUF CONCERT ELLE DESCENT FUR ET A MESURE
+                        if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                        {
+                            if (RespectMINQuality(item))
+                            {
+                                /// POUR TOUT LES OBJET SAUF SULFURAS ELLE DESCENT FUR ET A MESURE
+                                if (item.Name != "Sulfuras, Hand of Ragnaros")
+                                {
+                                    DecreaseQuality(item);
+                                }
+                            }
+                        }
+                        /// SI CONCERT DIRECT ENVOYER A ZERO
+                        else
+                        {
+                            item.Quality = item.Quality - item.Quality;
+                        }
+                    }
+                    /// SI CEST  DU FROMAGE LA QUALITE VA AUGMENTER
+                    else
+                    {
+                        if (RespectMAXQuality(item))
+                        {
+                            IncreaseQuality(item);
+                        }
+                    }
+                    
+
+                }
             }
         }
     }
