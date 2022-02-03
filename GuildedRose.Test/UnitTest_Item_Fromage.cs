@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace GuildedRose.Test
 {
+/*
     public class Tests_Item_Fromage
     {
 
@@ -39,4 +40,5 @@ namespace GuildedRose.Test
             Assert.AreEqual(Fromage.Quality, 12);
         }
     }
+*/
 }

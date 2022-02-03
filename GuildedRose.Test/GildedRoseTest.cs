@@ -10,6 +10,7 @@ namespace GuildedRose.Test
     [TestFixture]
     public class GildedRoseTest
     {
+        /*
         [Test]
         public void foo()
         {
@@ -18,5 +19,6 @@ namespace GuildedRose.Test
             app.UpdateQuality();
             Assert.AreEqual("foo", Items[0].Name);
         }
+        */
     }
 }

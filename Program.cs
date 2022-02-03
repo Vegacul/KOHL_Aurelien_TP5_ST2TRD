@@ -10,31 +10,34 @@ namespace csharp
             Console.WriteLine("OMGHAI!");
 
             IList<Item> Items = new List<Item>{
-                new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
-                new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
-                new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
-                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
-                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = -1, Quality = 80},
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    SellIn = 15,
-                    Quality = 20
-                },
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    SellIn = 10,
-                    Quality = 49
-                },
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    SellIn = 5,
-                    Quality = 49
-                },
+                new StandardItem("+5 Dexterity Vest",10, 20,false),
+                new AgedBrie("Aged Brie", 2, 0,false),
+                new StandardItem("Elixir of the Mongoose", 5, 7,false),
+                new Sulfuras("Sulfuras, Hand of Ragnaros",  0, 80,false),
+                new Sulfuras( "Sulfuras, Hand of Ragnaros", -1, 80,false),
+                new BackstagePasses
+                (
+                    "Backstage passes to a TAFKAL80ETC concert",
+                    15,
+                    20,
+                    false
+                ),
+                new BackstagePasses
+                (
+                    "Backstage passes to a TAFKAL80ETC concert",
+                    10,
+                    49,
+                    false
+                ),
+                new BackstagePasses
+                (
+                    "Backstage passes to a TAFKAL80ETC concert",
+                    5,
+                    49,
+                    false
+                ),
 				// this conjured item does not work properly yet
-				new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+				new StandardItem("Conjured Mana Cake", 3,6,true)
             };
 
             var app = new GildedRose(Items);
@@ -54,7 +57,7 @@ namespace csharp
 
 
 
-            //Console.ReadKey();
+           Console.ReadKey();
 
         }
     }

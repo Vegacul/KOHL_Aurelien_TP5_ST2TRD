@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace GuildedRose.Test
 {
+    /*
     public class Tests_Item_Legend
     {
 
@@ -38,4 +39,5 @@ namespace GuildedRose.Test
             Assert.AreEqual(LegendItem.SellIn, 25);
         }
     }
+*/
 }

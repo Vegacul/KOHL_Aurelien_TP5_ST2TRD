@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace GuildedRose.Test
 {
+ /*
     public class Tests_Item_Common
     {
         [Test]
@@ -53,4 +54,5 @@ namespace GuildedRose.Test
         }
 
     }
+*/
 }
