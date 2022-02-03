@@ -37,6 +37,36 @@ namespace GuildedRose.Test
         }
 
         [Test]
+        public void QualityShouldNotBeSuppTo50AtBegining()
+        {
+            // Arrange
+            var classicItem = new Item { Name = "Common Item", SellIn = 5, Quality = 60 };
+            IList<Item> Items = new List<Item> { classicItem };
+            GildedRose app = new GildedRose(Items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.AreEqual(classicItem.Quality, 49);
+        }
+
+        [Test]
+        public void QualityShouldNotBeInfTo0AtBegining()
+        {
+            // Arrange
+            var classicItem = new Item { Name = "Aged Brie", SellIn = 5, Quality = -5 };
+            IList<Item> Items = new List<Item> { classicItem };
+            GildedRose app = new GildedRose(Items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.AreEqual(classicItem.Quality, 1);
+        }
+
+        [Test]
         public void SulfuraShouldAlwaysBe80inQuality()
         {
             // Arrange

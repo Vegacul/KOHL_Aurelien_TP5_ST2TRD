@@ -22,7 +22,7 @@ namespace GuildedRose.Test
             app.UpdateQuality();
 
             // Assert
-            Assert.AreEqual(ConjuredItem.Quality, 13);
+            Assert.AreEqual(ConjuredItem.Quality, 14);
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace GuildedRose.Test
             app.UpdateQuality();
 
             // Assert
-            Assert.AreEqual(ConjuredItem.Quality, 6);
+            Assert.AreEqual(ConjuredItem.Quality, 8);
         }
     }
 }

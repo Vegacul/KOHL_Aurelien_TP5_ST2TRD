@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace csharp
 {
@@ -10,79 +11,140 @@ namespace csharp
             this.Items = Items;
         }
 
+        public void DecreaseQuality(int i, int x)
+        {
+            if (((Items[i].Quality - x) >= 0) && ((Items[i].Quality - x) <= 50))
+            {
+                Items[i].Quality = Items[i].Quality - x;
+            }
+            else if (((Items[i].Quality) > 50))
+            {
+                Items[i].Quality = 50;
+                Items[i].Quality = Items[i].Quality - x;
+            }
+            else
+            {
+                Items[i].Quality = 0;
+            }
+
+        }
+
+        public void IncreaseQuality(int i, int x)
+        {
+            if (((Items[i].Quality + x) <= 50)&& ((Items[i].Quality + x) > 0))
+            {
+                Items[i].Quality = Items[i].Quality + x;
+            }
+            else if ((Items[i].Quality + x) <= 0)
+            {
+                Items[i].Quality = 0;
+                Items[i].Quality = Items[i].Quality + x;
+            }
+            else
+            {
+                Items[i].Quality = 50;
+            }
+        }
+
+        public void UpdateQualityCommonItem(int i)
+        {
+            if (Items[i].SellIn >= 0)
+            {
+                DecreaseQuality(i, 1);
+
+            }
+            else
+            {
+                DecreaseQuality(i, 2);
+            }
+        }
+        public void UpdateQualityFromageItem(int i)
+        {
+            if (Items[i].SellIn >= 0)
+            {
+                IncreaseQuality(i, 1);
+
+            }
+            else
+            {
+                IncreaseQuality(i, 2);
+            }
+        }
+        public void UpdateQualityLegendItem(int i)
+        {
+            if (Items[i].Quality != 80)
+            {
+                Items[i].Quality = 80;
+
+            }
+        }
+        public void UpdateQualityConcertItem(int i)
+        {
+            if (Items[i].SellIn < 0)
+            {
+                Items[i].Quality = 0;
+
+            }
+            else if (Items[i].SellIn < 5)
+            {
+                IncreaseQuality(i, 3);
+            }
+            else if (Items[i].SellIn < 10)
+            {
+                IncreaseQuality(i, 2);
+            }
+            else if (Items[i].SellIn >= 10)
+            {
+                IncreaseQuality(i, 1);
+            }
+        }
+
+        public void UpdateQualityConjuredItem(int i)
+        {
+            if (Items[i].SellIn >= 0)
+            {
+                DecreaseQuality(i, 1);
+
+            }
+            else
+            {
+                DecreaseQuality(i, 2);
+            }
+        }
+
         public void UpdateQuality()
         {
+
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+
+                if (Items[i].Name.Contains("Sulfuras, Hand of Ragnaros"))
                 {
-                    if (Items[i].Quality > 0)
-                    {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
-                    }
+                    //Console.WriteLine("detection legend");
+                    UpdateQualityLegendItem(i);
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
-
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].SellIn < 11)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-
-                            if (Items[i].SellIn < 6)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                {
                     Items[i].SellIn = Items[i].SellIn - 1;
-                }
 
-                if (Items[i].SellIn < 0)
-                {
-                    if (Items[i].Name != "Aged Brie")
+                    if (Items[i].Name.Contains("Backstage passes"))
                     {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].Quality > 0)
-                            {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                                {
-                                    Items[i].Quality = Items[i].Quality - 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
-                        }
+                        UpdateQualityConcertItem(i);
+                    }
+                    else if (Items[i].Name == "Aged Brie")
+                    {
+                        UpdateQualityFromageItem(i);
+                    }
+                    else if (Items[i].Name.Contains("Conjured"))
+                    {
+                        UpdateQualityConjuredItem(i);
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
+                        UpdateQualityCommonItem(i);
                     }
                 }
+                
             }
         }
     }
