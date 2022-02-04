@@ -1,4 +1,6 @@
-﻿namespace csharp
+﻿
+
+namespace csharp
 {
 
     public class Item
@@ -13,6 +15,10 @@
         {
             return this.Name + ", " + this.SellIn + ", " + this.Quality;
         }
+        ~Item()  // finalizer
+        {
+            // cleanup statements...
+        }
 
         // Constructeur de l'item
         protected Item(string name, int sellIn, int quality, bool conjuration)
@@ -21,6 +27,52 @@
             SellIn = sellIn;
             Quality = quality;
             Conjuration = conjuration;
+        }
+        protected Item(string name, int sellIn, int quality)
+        {
+            Name = name;
+            SellIn = sellIn;
+            Quality = quality;
+            if (name.Contains("Conjured"))
+            {
+                Conjuration = true;
+                
+            }
+            else
+            {
+                Conjuration = false;
+            }
+
+
+
+
+        }
+
+        /// ne fonctionne pas comme les methods CopyToX des classes filles :(
+        public virtual void ChangeItemToSubitem(Item item)
+        {
+            string name = item.Name;
+            int sellIn = item.SellIn;
+            int quality = item.Quality;
+            bool conjuration = item.Conjuration;
+
+            if (name.Contains("Aged"))
+            {
+                new AgedBrie(name, sellIn, quality,conjuration);
+            }
+            else if (name.Contains("Backstage Passes"))
+            {
+                new BackstagePasses(name, sellIn, quality, conjuration);
+            }
+            else if (name.Contains("Sulfuras"))
+            {
+                new Sulfuras(name, sellIn, quality, conjuration);
+            }
+            else
+            {
+                new StandardItem(name, sellIn, quality, conjuration);
+            }
+
         }
 
         public virtual void UpdateSellIn()
@@ -45,6 +97,10 @@
     {
         public StandardItem(string name, int sellIn, int quality, bool conjuration)
             : base(name, sellIn, quality,conjuration) { }
+
+        public StandardItem(string name, int sellIn, int quality)
+    : base(name, sellIn, quality) { }
+
         public override void UpdateQuality()
         {
             if (SellIn > 0)
@@ -70,6 +126,11 @@
                 }
             }
         }
+        //   TEST AUTOMATIC CONVERSION 
+        public static StandardItem CopyToStandardItem(Item item)
+        {
+            return new StandardItem(item.Name,item.SellIn,item.Quality,item.Conjuration);
+        }
     }
 
     public class AgedBrie : Item
@@ -78,6 +139,8 @@
             : base(name, sellIn, quality, conjuration)
         {
         }
+
+        public AgedBrie(string name, int sellIn, int quality): base(name, sellIn, quality) { }
 
         public override void UpdateQuality()
         {
@@ -107,6 +170,11 @@
 
 
         }
+
+        public static AgedBrie CopyToAgedBrie(Item item)
+        {
+            return new AgedBrie(item.Name, item.SellIn, item.Quality, item.Conjuration);
+        }
     }
 
     public class BackstagePasses : Item
@@ -114,6 +182,7 @@
         public BackstagePasses(string name, int sellIn, int quality, bool conjuration) : base(name, sellIn, quality, conjuration)
         {
         }
+        public BackstagePasses(string name, int sellIn, int quality): base(name, sellIn, quality) { }
 
         public override void UpdateQuality()
         {
@@ -157,6 +226,11 @@
                 base.UpdateQuality();
             }
         }
+
+        public static BackstagePasses CopyToBackstagePasses(Item item)
+        {
+            return new BackstagePasses(item.Name, item.SellIn, item.Quality, item.Conjuration);
+        }
     }
 
 
@@ -165,6 +239,7 @@
         public Sulfuras(string name, int sellIn, int quality, bool conjuration) : base(name, sellIn, quality,conjuration)
         {
         }
+        public Sulfuras(string name, int sellIn, int quality): base(name, sellIn, quality) { }
 
         public override void UpdateSellIn()
         {
@@ -174,6 +249,11 @@
         public override void UpdateQuality()
         {
             Quality = 80;
+        }
+
+        public static Sulfuras CopyToSulfuras(Item item)
+        {
+            return new Sulfuras(item.Name, item.SellIn, item.Quality, item.Conjuration);
         }
 
     }

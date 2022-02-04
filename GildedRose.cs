@@ -9,6 +9,8 @@ namespace csharp
         public GildedRose(IList<Item> Items)
         {
             this.Items = Items;
+
+
         }
 
 
@@ -18,7 +20,7 @@ namespace csharp
         {
             foreach (Item item in Items)
             {
-                
+                item.ChangeItemToSubitem(item);
                 item.UpdateQuality();
                 item.UpdateSellIn();
             }

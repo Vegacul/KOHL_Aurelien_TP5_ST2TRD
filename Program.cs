@@ -10,11 +10,11 @@ namespace csharp
             Console.WriteLine("OMGHAI!");
 
             IList<Item> Items = new List<Item>{
-                new StandardItem("+5 Dexterity Vest",10, 20,false),
-                new AgedBrie("Aged Brie", 2, 0,false),
-                new StandardItem("Elixir of the Mongoose", 5, 7,false),
-                new Sulfuras("Sulfuras, Hand of Ragnaros",  0, 80,false),
-                new Sulfuras( "Sulfuras, Hand of Ragnaros", -1, 80,false),
+                new StandardItem("+5 Dexterity Vest",10, 20),
+                new AgedBrie("Aged Brie", 2, 0),
+                new StandardItem("Elixir of the Mongoose", 5, 7),
+                new Sulfuras("Sulfuras, Hand of Ragnaros",  0, 80),
+                new Sulfuras( "Sulfuras, Hand of Ragnaros", -1, 80),
                 new BackstagePasses
                 (
                     "Backstage passes to a TAFKAL80ETC concert",
@@ -37,10 +37,12 @@ namespace csharp
                     false
                 ),
 				// this conjured item does not work properly yet
-				new StandardItem("Conjured Mana Cake", 3,6,true)
+				new StandardItem("Conjured Mana Cake", 3,6),
+                //new AgedBrie("Conjured Aged Brie", 2, 23)
             };
 
             var app = new GildedRose(Items);
+
 
             for (var i = 0; i < 31; i++)
             {
