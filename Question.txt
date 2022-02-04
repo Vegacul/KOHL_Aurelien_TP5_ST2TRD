@@ -1,3 +1,4 @@
+Part 1: Questions
 
 1. What is this code about?
 
@@ -39,3 +40,63 @@
   The quality of a product is never more than 50 but the Sulfuras, Hand of Ragnaros had a quality of 80
 
 
+Part 2: Tests : 
+  
+  For this Part, i have implement 15 test, this test are separated in 6 different classes :
+  Tests on basic quality
+      Test if quality cant go lower than 0
+      Test if quality cant go upper than 50 (expt sulfuras 80)
+      Test is sulfuras always 80
+  Tests on item common
+      test if sell in decrease by one each update 
+      test if Quality decrease by one 
+      test if Quality decrease by two when sell in is lower than 0 
+  Tests on item_concert
+      test if Quality increase by one with the time
+       test if Quality increase by two with the time when sell in > 10
+       test if Quality increase by tree with the time when sell in > 5
+  Test on item_COnjured  (doesnt pssed because conjured is not implemented yet)
+      test if quality decrease tow time faster before date
+      test if quality decrease tow time faster after date
+  Tests on item_Fromage
+      test if quality growth by 1 before sell in date
+      test if quality growth by 2 after sell in date
+  Tests on item_Legend
+      test is sell in doesnt change 
+      test if quality doesnt change
+
+Part 3: Refactoring
+  for this part i have create new method and change things to simplified the code 
+  
+  RespectMINQuality
+  DecreaseQuality
+  UpdateSellIn
+  DecreaseSellIn
+  
+  replace for (var i = 0; i < Items.Count; i++) by foreach (Item item in Items)
+    so instead of doing items[i].quality=1 , in can do items.quality
+
+
+Part 4: Up, up, and away
+
+  for this part i have change the item 
+    now the item is a base classe :
+      -i have add a new component bool Conjuration, so if i create a new product i have to says if its conjured or not a the             implementation for the moment.
+          - An other possibility will be the create item like before and after check the name and add a conjured value if the name              contain "conjured "  
+                UPDATE : implemetation of a new constructor without bool conjuration in addition to the default constructor, this new constructor detecte in the name if the item is conjured or note and affect the internl value 
+      - i  had a item constructor to create item 
+      and a UdpadeSellIn method for the basic proccess of reducing day by one 
+      and a UpdateQuality method for basic quality check if note inf to 0 and not sup to 50
+    
+       
+    after This base item classe i have create 4 child item classes named :
+      StandardItem
+      AgedBrie
+      BackstagePasses
+      Sulfuras
+      
+      in each new child classes i have override method of the base classe 
+      like for fromage i have override UpdateQuality to had the process of increase by the day. 
+      
+  But for the moment i need to change directly in programm the way off creating new item, beacause i have to call directly the child classes but the most optimised way for more scalability would be to check the name of the item send and create the item wanted but i dont no how to do it 
+  possible solution to my problem create a convertor class  https://stackoverflow.com/questions/16534253/c-sharp-converting-base-class-to-child-class
